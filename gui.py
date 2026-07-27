@@ -168,6 +168,18 @@ class App(tk.Tk):
         if not descricao:
             return
 
+        nomes_tipos = {
+            "LockerPequeno": "Locker Pequeno",
+            "LockerGrande": "Locker Grande",
+            "LockerRefrigerado": "Locker Refrigerado"
+        }
+
+        self._escrever("\nLockers disponíveis:\n")
+        for locker in self.sistema.lockers:
+            status = "Ocupado" if locker.esta_ocupado() else "Livre"
+            nome_tipo = nomes_tipos.get(type(locker).__name__, type(locker).__name__)
+            self._escrever(f"  Locker {locker.get_numero()} - {nome_tipo} - {status}\n")
+
         numeros = [l.get_numero() for l in self.sistema.lockers]
         numero = self._pedir_numero(
             "Cadastrar Entrega",
