@@ -238,6 +238,13 @@ class SistemaLocker:
         pacote = Pacote(codigo, descricao)
         entrega = Entrega(morador, pacote)
 
+        print("\nLockers disponíveis:")
+        for locker in self.lockers:
+            status = "Ocupado" if locker.esta_ocupado() else "Livre"
+            print(f"  Locker {locker.get_numero()} - ", end="")
+            locker.exibir_tipo()
+            print(f"    Status: {status}")
+
         numeros = [locker.get_numero() for locker in self.lockers]
         menor = min(numeros)
         maior = max(numeros)
